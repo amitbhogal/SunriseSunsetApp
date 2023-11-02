@@ -1,0 +1,19 @@
+{
+  "name": "sunrise-sunset-app",
+  "version": "1.0.0",
+  "description": "An app that tells you exact sun rise and sun set times show you can enjoy walks and views of the rising sun or setting sun",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Amit Bhogal",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "geolocation": "^0.2.0"
+  }
+}
