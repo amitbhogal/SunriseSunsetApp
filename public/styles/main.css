@@ -14,11 +14,65 @@ body {
   box-sizing: border-box;
 }
 h1 {
-  color: white;
   /* font-family: "Titan One", cursive; */
+
+    /* option 1 */
+  /* color: #e3ae3c;
+  font-family: "Andalé Mono", monospace;
+  margin-bottom: 20px;
+  text-align: center; */
+
+    /* option 2 */
+  color: black;
   font-family: "Andalé Mono", monospace;
   margin-bottom: 20px;
   text-align: center;
+  border-style: outset;
+  border-color: #f2f990;
+  padding: 5px;
+  background: linear-gradient(
+    var(--rotate),
+    #f2f990,
+    #e3ae3c 43%,
+    #c24100
+  );
+}
+
+h2 {
+  /* font-family: "Titan One", cursive; */
+  color: #e3ae3c;
+  font-family: "Andalé Mono", monospace;
+  font-size: larger;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h3 {
+  /* font-family: "Titan One", cursive; */
+  color:#e3f179;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  margin-bottom: 20px;
+  text-align: center;
+  text-decoration: solid;
+}
+
+h4 {
+  /* font-family: "Titan One", cursive; */
+  color: #e3f179;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+li {
+  color: #e3ae3c;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+  margin-bottom: 20px;
+  text-align: center;
+  list-style-position: inside;
 }
 
 footer {
@@ -30,7 +84,7 @@ footer {
 }
 
 .card {
-  background: url("../images/0.jpg");
+  /* background: url("../images/0.jpg"); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -51,7 +105,8 @@ footer {
 
 .card:hover {
   /*color: rgb(199 88 250 / 100%);*/
-  color: rgb(250 199 88 / 100%);
+  /* color: rgb(250 199 88 / 100%); */
+  color: rgb(184 26 2 / 100%);
   transition: color 1s;
 }
 .card:hover:before,
@@ -132,7 +187,7 @@ footer {
 a {
   /* color: #212534; */
   color: #e3f179;
-  text-decoration: none;
+  text-decoration: underline;
   font-family: sans-serif;
   font-weight: bold;
   margin-top: 2rem;
@@ -145,4 +200,38 @@ a {
   color: white;
   font-size: 24px;
   font-family: "Titan One", cursive;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  /* max-width: 570px; */
+  max-width: 630px;
+  margin: 0 auto;
+  padding: 60px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* ------------ */
+.form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 80px;
+  grid-column-gap: 10px;
+}
+.form-submit {
+  outline: none;
+  border: 1px solid rgb(232, 232, 232);
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 36px;
+}
+.form-submit:focus {
+  box-shadow: 0 0 0 0.5px rgb(153, 153, 153);
 }

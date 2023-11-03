@@ -18,11 +18,11 @@ const relevantQuotes = { "Karl Schmidt" : "Every sunset is also a sunrise. It al
 
 // Array of arrays of [photographer, photographer link on unsplash. photographer's photo link on unsplash]
 const relevantImages = [ 
-                          ["Igor Kasalovic", "https://unsplash.com/@ikasalovic?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash", "https://unsplash.com/photos/view-of-seashore-sunset-tNDvFkxkBHo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"]
+                          ["0", "Igor Kasalovic", "https://unsplash.com/@ikasalovic?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash", "https://unsplash.com/photos/view-of-seashore-sunset-tNDvFkxkBHo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"]
                        ];
 
 
-const errorCodes = {}
+const errorCodes = {};
 
 // Use the public folder for static files.
 app.use(express.static("public"));
@@ -35,7 +35,8 @@ function getRandomQuote(obj) {
     return entries[entries.length * Math.random() << 0]; // shift operator << 0 does same as Math.floor(x)
 }
 
-// returns X, radomly selected array specifying [photographer, photographer link on unsplash. photographer's photo link on unsplash]
+// returns X, radomly selected array specifying 
+// [photographer, photographer link on unsplash. photographer's photo link on unsplash, random index selected in images array]
 function getRandomImage(array) {
   return array[array.length * Math.random() << 0]; // shift operator << 0 does same as Math.floor(x)
 }
@@ -45,13 +46,13 @@ app.get("/", async (req, res) => {
     try {
         const result = await axios.get("https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400");
 
-        
-
+        // Testing:        
+        // console.log(relevantImages);
         console.log(getRandomQuote(relevantQuotes));
-        console.log(getRandomQuote(relevantImages));
+        console.log(getRandomImage(relevantImages));
 
         res.render("index.ejs", { dynamicHeading: getRandomQuote(relevantQuotes),
-                                  content: JSON.stringify(result.data.results), 
+                                  content: result.data.results, 
                                   imageInfo: getRandomImage(relevantImages)
                                 });
       } catch (error) {
