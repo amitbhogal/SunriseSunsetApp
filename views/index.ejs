@@ -13,23 +13,14 @@
 
 <body>
   <h1>When does your Sun rise and set?</h1>
-  <h2>"<%= dynamicHeading[1]%>" <br> - <%=dynamicHeading[0]%></h2>
-  <!-- <div class="card">
-    <p>
-      Sunrise: <%= content.sunrise %>
-      <br>
-      Sunset: <%= content.sunset %>
-    </p>
-  </div> -->
-  <!-- <p class="user"></p> -->
 
   <div class="container">
     <h3> Kindly enter the longitude and latitude for your village, town or city: </h3>
   <ol>
-    <li>On your computer, open <a href= "https://www.google.com/maps" target = "_blank"> Google Maps</a>.</li>
-    <li>Right-click the place or area on the map. This will open a pop-up window. You can find your latitude and longitude in decimal format at the top.</li>
-    <li>To copy the coordinates automatically, left click on the latitude and longitude.</li>
-    <li>Paste BELOW the coordinates in the Google Maps provided format: latitude, longitude. Then press Submit.</li>
+    <li>Open <a href= "https://www.google.com/maps" target = "_blank"> Google Maps</a>. Search for your address/location.</li>
+    <li>Right-click on the red pin📍that appears on the map. A pop-up window will show with the latitude and longitude at the top.</li>
+    <li>Left click on the latitude and longitude to copy the coordinates automatically.</li>
+    <li>Paste BELOW the coordinates (as is) from Google Maps and press Go.</li>
   </ol>
   </h3>
 
@@ -38,51 +29,6 @@
     <button type="submit" class="form-submit">Go</button>
   </form>
 
-    <section id="cards" class="cards">
-
-      <% if (locals.data) { %>
-            <article class="card-item">
-
-              <h2 class="card-activity">
-                <!-- Show Activity -->
-                <%= data.activity %>
-              </h2>
-              <div class="card-info">
-                <span class="card-type">
-                  <!-- Show Activity type -->
-                  
-                        <%= data.type %>
-                </span>
-                <span class="card-participants">
-                  <!-- participants: Show participant number -->
-                  <%= data.participants %>
-                  <span class="card-number"></span>
-                </span>
-              </div>
-            </article>
-      <% } %>
-
-      <% if (locals.error) { %>
-        <div id="tag-error" class="tag-error">
-          <!-- Show any errors that were sent from the backend -->
-            <%= error %>
-        </div>
-      <% } %>
-
-    </section>
-  </div>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script>
-      $(document).ready(function() {
-        $(".card").css("background-image", "url(images/" + imageInfo[0] + ".jpg)");
-      });
-  </script>
-
 </body>
-
-<footer> Photo by <a href="<%= imageInfo[2] %>"><%= imageInfo[1] %></a> on <a href="<%= imageInfo[3] %>">Unsplash</a>
-</footer>
-
 
 </html>

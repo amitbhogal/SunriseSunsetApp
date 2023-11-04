@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sun - Rise & Set times</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Titan+One&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+</head>
+
+<body>
+  <h1>When does your Sun rise and set?</h1>
+  <h2>"<%= dynamicHeading[1]%>" <br> - <%=dynamicHeading[0]%></h2>
+  <div class="card">
+    <p>
+      Sunrise: <%= content.sunrise %> UTC
+      <br>
+      Sunset: <%= content.sunset %> UTC
+    </p>
+  </div>
+
+</body>
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $(".card").css("background-image", "url(images/" + imageInfo[0] + ".jpg)");
+    });
+</script> -->
+
+<footer> Photo by <a href="<%= imageInfo[2] %>"><%= imageInfo[1] %></a> on <a href="<%= imageInfo[3] %>">Unsplash</a>
+</footer>
+
+</html>

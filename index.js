@@ -2,6 +2,7 @@
 // 1. Import express and axios
 import express from "express";
 import axios from "axios";
+import bodyParser from "body-parser";
 
 // 2. Create an express app and set the port number.
 const app = express();
@@ -26,6 +27,7 @@ const errorCodes = {};
 
 // Use the public folder for static files.
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // returns X, a random key-value (author-quote) pair from the entries (key-value pair array) obtained from original dictionary
@@ -41,25 +43,39 @@ function getRandomImage(array) {
   return array[array.length * Math.random() << 0]; // shift operator << 0 does same as Math.floor(x)
 }
 
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
+      res.render("index.ejs");
+});
+
+  app.post("/submit", async (req, res) => {
+
+    // console.log(req.body.coordinates);
+
+    // split string with comma separating latitude and longitude
+    var [latitude, longitude] = req.body.coordinates.split(','); 
+    
+    latitude = latitude.replace(/\s+/g, ''); // remove spaces
+    longitude = longitude.replace(/\s+/g, ''); // remove spaces
+    
+    // console.log(latitude + longitude);
 
     try {
-        const result = await axios.get("https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400");
+        const result = await axios.get(`https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}`);
 
         // Testing:        
         // console.log(relevantImages);
-        console.log(getRandomQuote(relevantQuotes));
-        console.log(getRandomImage(relevantImages));
+        // console.log(getRandomQuote(relevantQuotes));
+        // console.log(getRandomImage(relevantImages));
 
-        res.render("index.ejs", { dynamicHeading: getRandomQuote(relevantQuotes),
-                                  content: result.data.results, 
-                                  imageInfo: getRandomImage(relevantImages)
+        res.render("reveal.ejs", { dynamicHeading: getRandomQuote(relevantQuotes),
+                                   content: result.data.results, 
+                                   imageInfo: getRandomImage(relevantImages)
                                 });
       } catch (error) {
-        res.render("index.ejs", { content: JSON.stringify(error.response.data) });
+        res.render("reveal.ejs", { error: JSON.stringify(error.response.data) });
       }
   });
-  
+
 // Listen on your predefined port and start the server.
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
