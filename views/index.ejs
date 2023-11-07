@@ -20,7 +20,7 @@
     <li>Open <a href= "https://www.google.com/maps" target = "_blank"> Google Maps</a>. Search for your address/location.</li>
     <li>Right-click on the red pin📍that appears on the map. A pop-up window will show with the latitude and longitude at the top.</li>
     <li>Left click on the latitude and longitude to copy the coordinates automatically.</li>
-    <li>Paste BELOW the coordinates (as is) from Google Maps and press Go.</li>
+    <li>Paste BELOW the coordinates (as is) from Google Maps and press Go. You will see your sunrise and sunset times (without daylight savings time).</li>
   </ol>
   </h3>
 
@@ -28,6 +28,12 @@
     <input name="coordinates" class="form-input">
     <button type="submit" class="form-submit">Go</button>
   </form>
+
+  <% if (locals.error) { %>
+    <p class="error"> <%= error %> </p>
+  <% } %>
+
+  </div>
 
 </body>
 

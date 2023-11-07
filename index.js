@@ -43,6 +43,19 @@ function getRandomImage(array) {
   return array[array.length * Math.random() << 0]; // shift operator << 0 does same as Math.floor(x)
 }
 
+function convertUTCToLocalTime(dateString){
+
+  // dateString
+  // Looks like "2015-05-21T05:05:35+00:00"
+
+  let date = new Date(`${dateString}`);
+
+  // Convert to Local time from UTC
+  let formattedTime = date.toLocaleTimeString('en-US', { hour12: true }); // formatted in AM/PM
+
+  return formattedTime;
+}
+
 app.get("/", (req, res) => {
       res.render("index.ejs");
 });
@@ -53,25 +66,28 @@ app.get("/", (req, res) => {
 
     // split string with comma separating latitude and longitude
     var [latitude, longitude] = req.body.coordinates.split(','); 
-    
-    latitude = latitude.replace(/\s+/g, ''); // remove spaces
-    longitude = longitude.replace(/\s+/g, ''); // remove spaces
-    
-    // console.log(latitude + longitude);
+
+    if (latitude) {latitude = latitude.replace(/\s+/g, '');}  // remove spaces
+    else { res.render("index.ejs", { error: "Please enter coordinates in the correct format." }); }
+    if (longitude){longitude.replace(/\s+/g, '');} // remove spaces
+    else { res.render("index.ejs", { error: "Please enter coordinates in the correct format." }); }
 
     try {
-        const result = await axios.get(`https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}`);
+    
+      // console.log(latitude + longitude);
+        const result = await axios.get(`https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=0`);
 
-        // Testing:        
-        // console.log(relevantImages);
-        // console.log(getRandomQuote(relevantQuotes));
-        // console.log(getRandomImage(relevantImages));
+      //  result.data.results, "results": {"sunrise":"2015-05-21T05:05:35+00:00","sunset":"2015-05-21T19:22:59+00:00", ...}
 
         res.render("reveal.ejs", { dynamicHeading: getRandomQuote(relevantQuotes),
-                                   content: result.data.results, 
+                                   content: {sunrise: convertUTCToLocalTime(result.data.results.sunrise), sunset: convertUTCToLocalTime(result.data.results.sunset)}, 
                                    imageInfo: getRandomImage(relevantImages)
                                 });
       } catch (error) {
+
+        // Test this server error:
+        // With `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=2`, where formatted parameter = 2
+        console.log(JSON.stringify(error.response.data));
         res.render("reveal.ejs", { error: JSON.stringify(error.response.data) });
       }
   });
